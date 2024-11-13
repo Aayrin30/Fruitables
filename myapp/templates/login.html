@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Fruits & Veggies</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url("{% static 'img/background1.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #333333;
+            text-align: center;
+        }
+
+        .login-container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-container label {
+            margin-bottom: 5px;
+            color: #555555;
+        }
+
+        .login-container input[type="email"],
+        .login-container input[type="password"] {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+        }
+
+        .login-container button {
+            padding: 10px;
+            background-color: #28a745;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .login-container button:hover {
+            background-color: #218838;
+        }
+
+        .login-container .signup-link {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .login-container .signup-link a {
+            color: #28a745;
+            text-decoration: none;
+        }
+
+        .login-container .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        {{e_msg}}
+        <h2>Login</h2>
+        <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            
+            <button type="submit">Login</button>
+        </form>
+        <div class="signup-link">
+            <p>Don't have an account? <a href="{% url 'register' %}">Sign up</a></p>
+        </div>
+        <div class="signup-link">
+            <p>Forgot your password? <a href="{% url 'forget' %}">Forget password</a></p>
+        </div>
+    </div>
+</body>
+</html>

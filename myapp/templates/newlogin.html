@@ -1,0 +1,488 @@
+
+<!--login  -->
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background: url("{% static 'img/background1.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .login{
+            border: 1px solid black;
+            width: 600px;
+            height: 900px;
+            background: url("{% static 'img/fruits.jpg' %}");
+            color: white;
+            border-radius: 20px;
+            box-shadow: 0px 20px 30px 30px rgba(0, 0, 0, 8);
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
+        form{
+            display: block;
+            box-sizing: border-box;
+            padding: 40px;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: brightness(40%);
+            flex-direction: column;
+            display: flex;
+            gap: 5px;
+        }
+        h1{
+            font-weight: normal;
+            font-size: 40px;
+            text-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.5);
+            margin: 60px;
+        }
+        label{
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            padding-left: 10px;
+        }
+        input{
+            background: rgba(255, 255, 255, 0.3); 
+            height: 40px;
+            line-height: 40px;
+            border-radius: 20px;
+            padding: 0px 20px;
+            border: none;
+            margin-bottom: 20px;
+            color: white;
+        }
+        button{
+            background: rgb(45,126,231);
+            height: 40px;
+            width: 30%;
+            line-height: 40px;
+            border-radius: 40px;
+            border: none;
+            margin: 10px 0px;
+            margin-left: 35%;
+            box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 20px;
+            text-transform: uppercase;
+        }
+        h3{
+            font-weight: normal;
+            font-size: 28px;
+        }
+        a{
+            font-weight: bold;
+            font-size: 26px;
+            color: white;
+        }
+        a::after {
+            color: rgb(233, 227, 239);
+        }
+     
+    </style>
+</head>
+<body>
+    <center>
+    <div class="login">
+        <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <h2>{{e_msg}}</h2>
+            <h1>LOG IN</h1>
+            <label>EMAIL</label>
+            <input type="text" name="email">
+            <label>PASSWORD</label>
+            <input type="text" name="password">
+            <button type="submit">Login</button>
+            <h3>Don't have an account??</h3>
+            <a href="{% url 'register' %}">Register Here</a>
+            <h3>Forget your password??</h3>
+            <a href="{% url 'forget' %}">Click Here</a>
+        </form>
+    </div></center>
+</body>
+</html>
+
+
+
+
+<!-- register -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background: url("{% static 'img/background1.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .login{
+            border: 1px solid black;
+            width: 600px;
+            height: 900px;
+            font-size: medium;
+            background: url("{% static 'img/fruits.jpg' %}");
+            color: white;
+            border-radius: 20px;
+            box-shadow: 0px 20px 30px 30px rgba(0, 0, 0, 8);
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
+        form{
+            display: block;
+            box-sizing: border-box;
+            padding: 40px;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: brightness(40%);
+            flex-direction: column;
+            display: flex;
+            gap: 5px;
+        }
+        h1{
+            font-weight: normal;
+            font-size: 40px;
+            text-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.5);
+            margin: 60px;
+        }
+        label{
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            padding-left: 10px;
+        }
+        input{
+            background: rgba(255, 255, 255, 0.3); 
+            height: 40px;
+            line-height: 40px;
+            border-radius: 20px;
+            padding: 0px 20px;
+            border: none;
+            margin-bottom: 20px;
+            color: white;
+        }
+        button{
+            background: rgb(45,126,231);
+            height: 40px;
+            width: 30%;
+            line-height: 40px;
+            border-radius: 40px;
+            border: none;
+            margin: 10px 0px;
+            margin-left: 35%;
+            box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 20px;
+            text-transform: uppercase;
+        }
+        h3{
+            font-weight: normal;
+            font-size: 28px;
+        }
+        a{
+            font-weight: bold;
+            font-size: 26px;
+            color: white;
+        }
+        a::after {
+            color: rgb(233, 227, 239);
+        }
+    </style>
+</head>
+<body>
+    <center>
+    <div class="login">
+        <form action="{% url 'register' %}" method="post">
+            {% csrf_token %}
+            <h2>{{e_msg}}</h2>
+            <h1>REGISTER</h1>
+            <label>NAME</label>
+            <input type="text" name="name">
+            <label>EMAIL</label>
+            <input type="email" name="email">
+            <label>PASSWORD</label>
+            <input type="text" name="password">
+            <label>CONFIRM PASSWORD</label>
+            <input type="text" name="conpass">
+            <button type="submit">Register</button>
+            <h3>Already have an account??</h3>
+            <a href="{% url 'login' %}">Login Here</a>
+
+
+        </form>
+    </div></center>
+</body>
+</html>
+
+
+<!-- forget pass -->
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background: url("{% static 'img/background1.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .login{
+            border: 1px solid black;
+            width: 600px;
+            height: 900px;
+            font-size: medium;
+            background: url("{% static 'img/fruits.jpg' %}");
+            color: white;
+            border-radius: 20px;
+            box-shadow: 0px 20px 30px 30px rgba(0, 0, 0, 8);
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
+        form{
+            display: block;
+            box-sizing: border-box;
+            padding: 40px;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: brightness(40%);
+            flex-direction: column;
+            display: flex;
+            gap: 5px;
+        }
+        h1{
+            font-weight: normal;
+            font-size: 40px;
+            text-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.5);
+            margin: 60px;
+        }
+        label{
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            padding-left: 10px;
+        }
+        input{
+            background: rgba(255, 255, 255, 0.3); 
+            height: 40px;
+            line-height: 40px;
+            border-radius: 20px;
+            padding: 0px 20px;
+            border: none;
+            margin-bottom: 20px;
+            color: white;
+        }
+        button{
+            background: rgb(45,126,231);
+            height: 40px;
+            width: 30%;
+            line-height: 40px;
+            border-radius: 40px;
+            border: none;
+            margin: 10px 0px;
+            margin-left: 35%;
+            box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 20px;
+            text-transform: uppercase;
+        }
+        h3{
+            font-weight: normal;
+            font-size: 28px;
+        }
+        a{
+            font-weight: bold;
+            font-size: 26px;
+            color: white;
+        }
+        a::after {
+            color: rgb(233, 227, 239);
+        }
+    </style>
+</head>
+<body>
+    <center>
+    <div class="login">
+        <form action="{% url 'forget' %}" method="post">
+            {% csrf_token %}
+            <h2>{{e_msg}}</h2>
+            <h1>FORGOT PASSWORD</h1>
+            <label>EMAIL</label>
+            <input type="email" name="email">
+            
+            <button type="submit" href="{% url 'confirm_password' %}">Confirm</button>
+            <h3>Already have an account??</h3>
+            <a href="{% url 'login' %}">Login Here</a>
+            <h3>Don't have an account??</h3>
+            <a href="{% url 'register' %}">Register Here</a>
+
+
+        </form>
+    </div></center>
+</body>
+</html>
+
+
+
+
+<!-- confirm password -->
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background: url("{% static 'img/background1.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .login{
+            border: 1px solid black;
+            width: 600px;
+            height: 900px;
+            font-size: medium;
+            background: url("{% static 'img/fruits.jpg' %}");
+            color: white;
+            border-radius: 20px;
+            box-shadow: 0px 20px 30px 30px rgba(0, 0, 0, 8);
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
+        form{
+            display: block;
+            box-sizing: border-box;
+            padding: 40px;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: brightness(40%);
+            flex-direction: column;
+            display: flex;
+            gap: 5px;
+        }
+        h1{
+            font-weight: normal;
+            font-size: 40px;
+            text-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.5);
+            margin: 60px;
+        }
+        label{
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            padding-left: 10px;
+        }
+        input{
+            background: rgba(255, 255, 255, 0.3); 
+            height: 40px;
+            line-height: 40px;
+            border-radius: 20px;
+            padding: 0px 20px;
+            border: none;
+            margin-bottom: 20px;
+            color: white;
+        }
+        button{
+            background: rgb(45,126,231);
+            height: 40px;
+            width: 30%;
+            line-height: 40px;
+            border-radius: 40px;
+            border: none;
+            margin: 10px 0px;
+            margin-left: 35%;
+            box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 20px;
+            text-transform: uppercase;
+        }
+        h3{
+            font-weight: normal;
+            font-size: 28px;
+        }
+        a{
+            font-weight: bold;
+            font-size: 26px;
+            color: white;
+        }
+        a::after {
+            color: rgb(233, 227, 239);
+        }
+    </style>
+</head>
+<body>
+    <center>
+    <div class="login">
+        <form action="{% url 'confirm_password' %}" method="post">
+            {% csrf_token %}
+            <h2>{{e_msg}}</h2>
+            <h1>CONFIRM PASSWORDS</h1>
+            <label>EMAIL</label>
+            <input type="text" value="{{email}}" name="email">
+
+            <label>ENTER OTP</label>
+            <input type="text" name="otp">
+            <label>PASSWORD</label>
+            <input type="text" name="password">
+            <label>CONFIRM PASSWORD</label>
+            <input type="text" name="conpass">
+            
+            <button type="submit">Change</button>
+            <h3>Already have an account??</h3>
+            <a href="{% url 'login' %}">Login Here</a>
+            <h3>Don't have an account??</h3>
+            <a href="{% url 'register' %}">Register Here</a>
+
+
+        </form>
+    </div></center>
+</body>
+</html>

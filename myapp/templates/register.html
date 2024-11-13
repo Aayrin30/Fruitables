@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Fruits & Veggies</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url("{% static 'img/background1.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .register-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .register-container h2 {
+            margin-bottom: 20px;
+            color: #333333;
+            text-align: center;
+        }
+
+        .register-container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .register-container label {
+            margin-bottom: 5px;
+            color: #555555;
+        }
+
+        .register-container input[type="text"],
+        .register-container input[type="email"],
+        .register-container input[type="password"] {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+        }
+
+        .register-container button {
+            padding: 10px;
+            background-color: #28a745;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .register-container button:hover {
+            background-color: #218838;
+        }
+
+        .register-container .login-link {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .register-container .login-link a {
+            color: #28a745;
+            text-decoration: none;
+        }
+
+        .register-container .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .register-container {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .register-container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        {{e_msg}}
+        <h2>Register</h2>
+        <form action="{% url 'register' %}" method="POST">
+            {% csrf_token %}
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" name="conpass" required>
+            
+            <button type="submit">Register</button>
+        </form>
+        <div class="login-link">
+            <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+        </div>
+    </div>
+</body>
+</html>

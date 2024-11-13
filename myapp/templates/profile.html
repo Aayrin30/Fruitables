@@ -1,0 +1,215 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+
+
+</style>
+
+  <!-- Modal Search Start -->
+  <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content rounded-0">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex align-items-center">
+                <div class="input-group w-75 mx-auto d-flex">
+                    <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
+                    <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Search End -->
+
+
+<!-- Single Page Header start -->
+<div class="container-fluid page-header py-5">
+    <div class="row justify-content-md-center">
+        <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+            <h1 class="text-center text-white display-6">Profile</h1>
+          <p class="text-white text-center lead fs-4 mb-5">The Profile page is your digital hub, where you can fine-tune your experience. Here's a closer look at the settings you can expect to find in your profile page.</p>
+          <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
+        </div>
+      </div>
+</div>
+<!-- Single Page Header End -->
+<!-- Profile 1 - Bootstrap Brain Component -->
+<section class="bg-light py-3 py-md-5 py-xl-8">
+   
+    <div class="container">
+      <div class="row gy-4 gy-lg-0">
+        <div class="col-12 col-lg-4 col-xl-3">
+          <div class="row gy-4">
+            <div class="col-12">
+              <div class="card widget-card border-light shadow-sm">
+                <div class="card-header text-white bg-primary">Welcome, {{uid.name}}</div>
+                <div class="card-body">
+                  <div class="text-center mb-3">
+                    <img src="{% static 'img/avatar.jpg' %}" class="img-fluid rounded-circle" alt="Luna John">
+                  </div>
+                  <h5 class="text-center mb-1">{{uid.name}}</h5>
+                  <p class="text-center text-secondary mb-4">Customer</p>
+                  <!-- <ul class="list-group list-group-flush mb-4">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                     
+                      <div class="d-grid m-0">
+                        <button class="btn btn-outline-primary" type="button">Wishlist</button>
+                      </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                      <h6 class="m-0">Cart</h6>
+                      <span>5,987</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                      <h6 class="m-0">Orders</h6>
+                      <span>4,620</span>
+                    </li>
+                  </ul> -->
+                  <div class="d-grid m-3">
+                    <button class="btn btn-outline-primary" type="button" href="{% url 'show_wishlist' %}">Wishlist</button>
+                  </div>
+                  <div class="d-grid m-3">
+                    <button class="btn btn-outline-primary" type="button" href="{% url 'cart' %}">Cart</button>
+                  </div>
+                  <div class="d-grid m-3">
+                    <button class="btn btn-outline-primary" type="button" href="{% url 'orders' %}">Orders</button>
+                  </div>
+                 
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="col-12">
+              <div class="card widget-card border-light shadow-sm">
+                <div class="card-header text-white bg-primary">Social Accounts</div>
+                <div class="card-body">
+                  <a href="#!" class="d-inline-block bg-dark link-light lh-1 p-2 rounded">
+                    <i class="bi bi-youtube"></i>
+                  </a>
+                  <a href="#!" class="d-inline-block bg-dark link-light lh-1 p-2 rounded">
+                    <i class="bi bi-twitter-x"></i>
+                  </a>
+                  <a href="#!" class="d-inline-block bg-dark link-light lh-1 p-2 rounded">
+                    <i class="bi bi-facebook"></i>
+                  </a>
+                  <a href="#!" class="d-inline-block bg-dark link-light lh-1 p-2 rounded">
+                    <i class="bi bi-linkedin"></i>
+                  </a>
+                </div>
+              </div>
+            </div>          
+          </div>
+        </div>
+
+
+
+        <div class="col-12 col-lg-8 col-xl-9">
+          <div class="card widget-card border-light shadow-sm">
+            <div class="card-body p-4">
+              <ul class="nav nav-tabs" id="profileTab" role="tablist">
+               
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Profile</button>
+                </li>
+              
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="password-tab" data-bs-toggle="tab" data-bs-target="#password-tab-pane" type="button" role="tab" aria-controls="password-tab-pane" aria-selected="false">Password</button>
+                </li>
+              </ul>
+              <div class="tab-content pt-4" id="profileTabContent-{{forloop.counter}}">
+                
+                <div class="tab-pane fade show active" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                  <form action="{% url 'profile' %}" method="POST" class="row gy-3 gy-xxl-4">
+                    {% csrf_token %}
+                    <div class="col-12">
+                      <div class="row gy-2">
+                        <label class="col-12 form-label m-0">Profile Image</label>
+
+                        {% if image %}
+                        <div class="col-12">
+                          <img src="{{uid.image.url}}" class="img-fluid" alt="Luna John">
+                        </div>
+                        {% else %}
+                        <div class="col-12">
+                          <img src="{% static 'img/avatar.jpg' %}" class="img-fluid" alt="Luna John">
+                        </div>
+                        {% endif %}
+                        <div class="col-12">
+                          <a href="{% url 'profile' %}" class="d-inline-block bg-primary link-light lh-1 p-2 rounded">
+                            <i class="bi bi-upload"></i>
+                          </a>
+                          <a href="{% url 'profile' %}" class="d-inline-block bg-danger link-light lh-1 p-2 rounded">
+                            <i class="bi bi-trash"></i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="inputFirstName" class="form-label">Name</label>
+                      <input type="text" class="form-control" id="inputFirstName" name="name" value="{{uid.name}}">
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="inputEmail" class="form-label">Email</label>
+                      <input type="email" class="form-control" id="inputEmail" name="email" value="{{uid.email}}">
+                    </div>
+                
+                    <div class="col-12 col-md-6">
+                      <label for="inputPhone" class="form-label">Phone</label>
+                      <input type="tel" class="form-control" id="inputPhone" name="phone" value="{{uid.phone}}">
+                    </div>
+                   
+                    <div class="col-12 col-md-6">
+                      <label for="inputAddress" class="form-label">Address</label>
+                      <input type="text" class="form-control" id="inputAddress" name="address" value="{{uid.address}}">
+                    </div>
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                  </form>
+                </div>
+            
+
+                <div class="tab-pane fade" id="password-tab-pane" role="tabpanel" aria-labelledby="password-tab" tabindex="0">
+                  <form action="{% url 'password' %}" method="post">
+                  {% csrf_token %}
+
+                    <div class="row gy-3 gy-xxl-4">
+                      <div class="col-12">
+                        <label for="currentPassword" class="form-label">Current Password</label>
+                        <input type="text" class="form-control" id="currentPassword" name="password" >
+                      </div>
+                    <div class="col-12">
+                        <label for="newPassword" class="form-label">New Password</label>
+                        <input type="password" class="form-control" id="newPassword" name="newpassword">
+                      </div>
+                      <div class="col-12">
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmpassword">
+                      </div>
+                      {{e_msg1}}
+                      <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Change Password</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </section>
+
+{% endblock %}
